@@ -1,0 +1,572 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>CRYPTEX — Market Intelligence Terminal</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@700;900&family=Chakra+Petch:wght@400;600;700&family=Share+Tech+Mono&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="main.css" />
+</head>
+<body>
+
+  <div class="bg-grid"></div>
+  <div class="bg-glow"></div>
+
+  <header class="header">
+    <div class="header-left">
+      <div class="logo"><span class="logo-bracket">[</span> CRYPTEX <span class="logo-bracket">]</span></div>
+      <div class="header-sub">MARKET INTELLIGENCE TERMINAL</div>
+    </div>
+    <div class="header-right">
+      <div class="status-indicator">
+        <div class="status-dot" id="status-dot"></div>
+        <span class="status-text" id="status-text">LIVE</span>
+      </div>
+      <div class="header-time" id="header-time">--:--:--</div>
+    </div>
+  </header>
+
+  <nav class="main-nav">
+    <button class="nav-tab active" data-tab="single">
+      <span class="tab-icon">◈</span> SINGLE COIN
+    </button>
+    <button class="nav-tab" data-tab="scanner">
+      <span class="tab-icon">⊞</span> MARKET SCANNER
+    </button>
+    <button class="nav-tab" data-tab="smccoin">
+      <span class="tab-icon">◎</span> SMC COIN SCANNER
+    </button>
+    <button class="nav-tab" data-tab="smcscan">
+      <span class="tab-icon">⟁</span> SMC MARKET SCANNER
+    </button>
+  </nav>
+
+  <main class="main-content">
+
+    <!-- ═══════════════════════════════════════════
+         TAB 1: SINGLE COIN
+    ═══════════════════════════════════════════ -->
+    <section class="tab-panel active" id="tab-single">
+      <div class="controls-bar">
+        <div class="search-wrapper">
+          <span class="search-prefix">TICKER://</span>
+          <input type="text" id="coin-input" class="coin-input" placeholder="BTC" maxlength="10" autocomplete="off" spellcheck="false" />
+        </div>
+        <div class="tf-selector" id="tf-selector-single">
+          <button class="tf-btn" data-tf="5m">5M</button>
+          <button class="tf-btn" data-tf="15m">15M</button>
+          <button class="tf-btn" data-tf="30m">30M</button>
+          <button class="tf-btn active" data-tf="1h">1H</button>
+          <button class="tf-btn" data-tf="4h">4H</button>
+          <button class="tf-btn" data-tf="1d">1D</button>
+          <button class="tf-btn" data-tf="1w">1W</button>
+        </div>
+        <button class="fetch-btn" id="fetch-btn"><span class="fetch-icon">⟳</span> FETCH</button>
+      </div>
+
+      <div class="source-bar" id="source-bar" style="display:none;">
+        <span class="source-label">DATA SOURCE:</span><span class="source-badge" id="source-badge">—</span>
+        <span class="source-label" style="margin-left:16px;">TIMEFRAME:</span><span class="source-badge" id="tf-badge">—</span>
+        <span class="source-label" style="margin-left:16px;">UPDATED:</span><span class="source-badge" id="updated-badge">—</span>
+      </div>
+
+      <div class="empty-state" id="empty-state">
+        <div class="empty-icon">◈</div>
+        <div class="empty-title">ENTER A TICKER TO BEGIN</div>
+        <div class="empty-sub">Type any coin ticker above — BTC, ETH, SOL, etc.</div>
+      </div>
+      <div class="loading-state" id="loading-state" style="display:none;">
+        <div class="loader-ring"></div>
+        <div class="loader-text" id="loader-text">FETCHING DATA...</div>
+      </div>
+      <div class="error-state" id="error-state" style="display:none;">
+        <div class="error-icon">⚠</div>
+        <div class="error-title" id="error-title">FETCH FAILED</div>
+        <div class="error-sub" id="error-sub">All sources exhausted. Check ticker and try again.</div>
+      </div>
+
+      <div class="coin-grid" id="coin-grid" style="display:none;">
+        <div class="grid-row row-hero">
+          <div class="card card-identity">
+            <div class="coin-header">
+              <img class="coin-logo" id="coin-logo" src="" alt="" style="display:none;" />
+              <div class="coin-names">
+                <div class="coin-symbol" id="coin-symbol">—</div>
+                <div class="coin-name" id="coin-name">—</div>
+                <div class="coin-rank" id="coin-rank">—</div>
+              </div>
+            </div>
+            <div class="coin-categories" id="coin-categories"></div>
+            <div class="coin-meta-row">
+              <div class="meta-item"><div class="meta-label">GENESIS</div><div class="meta-value" id="coin-genesis">—</div></div>
+              <div class="meta-item"><div class="meta-label">ALGORITHM</div><div class="meta-value" id="coin-algo">—</div></div>
+              <div class="meta-item"><div class="meta-label">WATCHLIST</div><div class="meta-value" id="coin-watchlist">—</div></div>
+            </div>
+            <div class="sentiment-bar-wrapper">
+              <div class="sentiment-label-row">
+                <span class="bull-label" id="sentiment-up">—% BULLISH</span>
+                <span class="bear-label" id="sentiment-down">—% BEARISH</span>
+              </div>
+              <div class="sentiment-bar"><div class="sentiment-fill" id="sentiment-fill" style="width:50%"></div></div>
+            </div>
+          </div>
+          <div class="card card-price-action">
+            <div class="card-header-label"><span class="card-label-icon">▸</span> PRICE ACTION</div>
+            <div class="price-hero">
+              <div class="price-main" id="price-main">—</div>
+              <div class="price-changes">
+                <div class="price-change-item"><span class="pc-label">1H</span><span class="pc-value" id="pc-1h">—</span></div>
+                <div class="price-change-item"><span class="pc-label">24H</span><span class="pc-value" id="pc-24h">—</span></div>
+                <div class="price-change-item"><span class="pc-label">7D</span><span class="pc-value" id="pc-7d">—</span></div>
+              </div>
+            </div>
+            <div class="price-grid">
+              <div class="pg-item"><div class="pg-label">MARK PRICE</div><div class="pg-value" id="mark-price">—</div></div>
+              <div class="pg-item"><div class="pg-label">INDEX PRICE</div><div class="pg-value" id="index-price">—</div></div>
+              <div class="pg-item"><div class="pg-label">24H HIGH</div><div class="pg-value bull" id="high-24h">—</div></div>
+              <div class="pg-item"><div class="pg-label">24H LOW</div><div class="pg-value bear" id="low-24h">—</div></div>
+              <div class="pg-item"><div class="pg-label">VOLUME (BASE)</div><div class="pg-value" id="vol-base">—</div></div>
+              <div class="pg-item"><div class="pg-label">VOLUME (QUOTE)</div><div class="pg-value" id="vol-quote">—</div></div>
+              <div class="pg-item"><div class="pg-label">WEIGHTED AVG</div><div class="pg-value" id="weighted-avg">—</div></div>
+              <div class="pg-item"><div class="pg-label">TRADE COUNT</div><div class="pg-value" id="trade-count">—</div></div>
+            </div>
+            <div class="ohlc-row">
+              <div class="ohlc-label">TF OHLC</div>
+              <div class="ohlc-values">
+                <span class="ohlc-item"><span class="ohlc-tag">O</span><span id="ohlc-o">—</span></span>
+                <span class="ohlc-item"><span class="ohlc-tag bull">H</span><span id="ohlc-h">—</span></span>
+                <span class="ohlc-item"><span class="ohlc-tag bear">L</span><span id="ohlc-l">—</span></span>
+                <span class="ohlc-item"><span class="ohlc-tag">C</span><span id="ohlc-c">—</span></span>
+              </div>
+            </div>
+          </div>
+          <div class="card card-funding">
+            <div class="card-header-label"><span class="card-label-icon">▸</span> FUNDING & FUTURES</div>
+            <div class="funding-main">
+              <div class="funding-rate-display">
+                <div class="fr-label">CURRENT FUNDING RATE</div>
+                <div class="fr-value" id="funding-rate">—</div>
+                <div class="fr-sub" id="funding-sentiment">—</div>
+              </div>
+              <div class="funding-countdown">
+                <div class="fc-label">NEXT FUNDING IN</div>
+                <div class="fc-timer" id="funding-countdown">--:--:--</div>
+              </div>
+            </div>
+            <div class="price-grid">
+              <div class="pg-item"><div class="pg-label">OPEN INTEREST</div><div class="pg-value" id="open-interest">—</div></div>
+              <div class="pg-item"><div class="pg-label">OI VALUE (USD)</div><div class="pg-value" id="oi-value">—</div></div>
+              <div class="pg-item"><div class="pg-label">INTEREST RATE</div><div class="pg-value" id="interest-rate">—</div></div>
+              <div class="pg-item"><div class="pg-label">FUNDING INTERVAL</div><div class="pg-value" id="funding-interval">—</div></div>
+              <div class="pg-item"><div class="pg-label">LAST FUNDING RATE</div><div class="pg-value" id="last-funding-rate">—</div></div>
+              <div class="pg-item"><div class="pg-label">TURNOVER 24H</div><div class="pg-value" id="turnover-24h">—</div></div>
+            </div>
+          </div>
+        </div>
+
+        <div class="grid-row row-levels">
+          <div class="card card-sr">
+            <div class="card-header-label"><span class="card-label-icon">▸</span> SUPPORT & RESISTANCE <span class="card-tf-badge" id="sr-tf-badge">—</span></div>
+            <div class="levels-container" id="sr-levels"><div class="levels-placeholder">Awaiting data...</div></div>
+          </div>
+          <div class="card card-zones">
+            <div class="card-header-label"><span class="card-label-icon">▸</span> SUPPLY & DEMAND ZONES <span class="card-tf-badge" id="sd-tf-badge">—</span></div>
+            <div class="zones-container" id="sd-zones"><div class="levels-placeholder">Awaiting data...</div></div>
+          </div>
+          <div class="card card-liquidity">
+            <div class="card-header-label"><span class="card-label-icon">▸</span> LIQUIDITY ZONES</div>
+            <div class="zones-container" id="liq-zones"><div class="levels-placeholder">Awaiting data...</div></div>
+          </div>
+        </div>
+
+        <div class="grid-row row-book">
+          <div class="card card-orderbook">
+            <div class="card-header-label"><span class="card-label-icon">▸</span> ORDER BOOK SNAPSHOT</div>
+            <div class="orderbook-wrapper">
+              <div class="ob-side ob-asks">
+                <div class="ob-side-label bear">ASKS (SELL)</div>
+                <div class="ob-header"><span>PRICE</span><span>SIZE</span><span>TOTAL</span></div>
+                <div id="ob-asks"><div class="levels-placeholder">—</div></div>
+              </div>
+              <div class="ob-spread">
+                <div class="spread-label">SPREAD</div>
+                <div class="spread-value" id="ob-spread">—</div>
+                <div class="spread-pct" id="ob-spread-pct">—</div>
+              </div>
+              <div class="ob-side ob-bids">
+                <div class="ob-side-label bull">BIDS (BUY)</div>
+                <div class="ob-header"><span>PRICE</span><span>SIZE</span><span>TOTAL</span></div>
+                <div id="ob-bids"><div class="levels-placeholder">—</div></div>
+              </div>
+            </div>
+            <div class="ob-imbalance">
+              <div class="imb-label">BID/ASK IMBALANCE</div>
+              <div class="imb-bar">
+                <div class="imb-bid" id="imb-bid" style="width:50%"></div>
+                <div class="imb-ask" id="imb-ask" style="width:50%"></div>
+              </div>
+              <div class="imb-values">
+                <span class="bull" id="imb-bid-pct">50%</span>
+                <span class="bear" id="imb-ask-pct">50%</span>
+              </div>
+            </div>
+          </div>
+          <div class="card card-market-stats">
+            <div class="card-header-label"><span class="card-label-icon">▸</span> MARKET STATS</div>
+            <div class="price-grid">
+              <div class="pg-item"><div class="pg-label">MARKET CAP</div><div class="pg-value" id="market-cap">—</div></div>
+              <div class="pg-item"><div class="pg-label">FDV</div><div class="pg-value" id="fdv">—</div></div>
+              <div class="pg-item"><div class="pg-label">CIRCULATING SUPPLY</div><div class="pg-value" id="circ-supply">—</div></div>
+              <div class="pg-item"><div class="pg-label">MAX SUPPLY</div><div class="pg-value" id="max-supply">—</div></div>
+              <div class="pg-item"><div class="pg-label">ATH</div><div class="pg-value bull" id="coin-ath">—</div></div>
+              <div class="pg-item"><div class="pg-label">ATH CHANGE</div><div class="pg-value bear" id="coin-ath-change">—</div></div>
+              <div class="pg-item"><div class="pg-label">ATL</div><div class="pg-value bear" id="coin-atl">—</div></div>
+              <div class="pg-item"><div class="pg-label">ATL CHANGE</div><div class="pg-value bull" id="coin-atl-change">—</div></div>
+            </div>
+            <div class="card-header-label" style="margin-top:16px;"><span class="card-label-icon">▸</span> PRICE CHANGE HISTORY</div>
+            <div class="tf-changes" id="tf-changes">
+              <div class="tfc-item"><span class="tfc-label">14D</span><span class="tfc-value" id="pc-14d">—</span></div>
+              <div class="tfc-item"><span class="tfc-label">30D</span><span class="tfc-value" id="pc-30d">—</span></div>
+              <div class="tfc-item"><span class="tfc-label">60D</span><span class="tfc-value" id="pc-60d">—</span></div>
+              <div class="tfc-item"><span class="tfc-label">200D</span><span class="tfc-value" id="pc-200d">—</span></div>
+              <div class="tfc-item"><span class="tfc-label">1Y</span><span class="tfc-value" id="pc-1y">—</span></div>
+            </div>
+          </div>
+          <div class="card card-info">
+            <div class="card-header-label"><span class="card-label-icon">▸</span> COIN INFO & SOCIALS</div>
+            <div class="socials-grid" id="socials-grid"></div>
+            <div class="description-wrapper">
+              <div class="desc-label">ABOUT</div>
+              <div class="description-text" id="coin-description">—</div>
+              <button class="desc-toggle" id="desc-toggle">READ MORE</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ═══════════════════════════════════════════
+         TAB 2: MARKET SCANNER
+    ═══════════════════════════════════════════ -->
+    <section class="tab-panel" id="tab-scanner">
+      <div class="controls-bar">
+        <div class="scanner-source-toggle">
+          <button class="src-btn active" data-src="binance">BINANCE</button>
+          <button class="src-btn" data-src="bybit">BYBIT</button>
+        </div>
+        <div class="tf-selector" id="tf-selector-scanner">
+          <button class="tf-btn" data-tf="5m">5M</button>
+          <button class="tf-btn" data-tf="15m">15M</button>
+          <button class="tf-btn" data-tf="30m">30M</button>
+          <button class="tf-btn active" data-tf="1h">1H</button>
+          <button class="tf-btn" data-tf="4h">4H</button>
+          <button class="tf-btn" data-tf="1d">1D</button>
+          <button class="tf-btn" data-tf="1w">1W</button>
+        </div>
+        <button class="fetch-btn" id="scanner-fetch-btn"><span class="fetch-icon">⟳</span> SCAN MARKET</button>
+      </div>
+      <div class="source-bar" id="scanner-stats-bar" style="display:none;">
+        <span class="source-label">PAIRS SCANNED:</span><span class="source-badge" id="scan-count">—</span>
+        <span class="source-label" style="margin-left:16px;">SOURCE:</span><span class="source-badge" id="scan-source">—</span>
+        <span class="source-label" style="margin-left:16px;">UPDATED:</span><span class="source-badge" id="scan-updated">—</span>
+      </div>
+      <div class="loading-state" id="scanner-loading" style="display:none;">
+        <div class="loader-ring"></div>
+        <div class="loader-text" id="scanner-loader-text">SCANNING MARKET...</div>
+      </div>
+      <div class="empty-state" id="scanner-empty">
+        <div class="empty-icon">⊞</div>
+        <div class="empty-title">READY TO SCAN</div>
+        <div class="empty-sub">Select timeframe and hit SCAN MARKET to fetch all pairs</div>
+      </div>
+      <div class="scanner-nav" id="scanner-nav" style="display:none;">
+        <button class="scanner-tab active" data-category="gainers">▲ TOP GAINERS</button>
+        <button class="scanner-tab" data-category="losers">▼ TOP LOSERS</button>
+        <button class="scanner-tab" data-category="volume">◈ VOLUME</button>
+        <button class="scanner-tab" data-category="funding">⚡ FUNDING</button>
+        <button class="scanner-tab" data-category="oi">◉ OPEN INTEREST</button>
+        <button class="scanner-tab" data-category="momentum">⟶ MOMENTUM</button>
+      </div>
+      <div class="scanner-table-wrapper" id="scanner-table-wrapper" style="display:none;">
+        <table class="scanner-table" id="scanner-table">
+          <thead id="scanner-thead"></thead>
+          <tbody id="scanner-tbody"></tbody>
+        </table>
+      </div>
+    </section>
+
+    <!-- ═══════════════════════════════════════════
+         TAB 3: SMC COIN SCANNER
+    ═══════════════════════════════════════════ -->
+    <section class="tab-panel" id="tab-smccoin">
+      <div class="controls-bar">
+        <div class="search-wrapper">
+          <span class="search-prefix">TICKER://</span>
+          <input type="text" id="smc-coin-input" class="coin-input" placeholder="BTC" maxlength="10" autocomplete="off" spellcheck="false" />
+        </div>
+        <div class="tf-selector" id="smc-tf-selector-coin">
+          <button class="tf-btn" data-tf="5m">5M</button>
+          <button class="tf-btn" data-tf="15m">15M</button>
+          <button class="tf-btn" data-tf="30m">30M</button>
+          <button class="tf-btn active" data-tf="1h">1H</button>
+          <button class="tf-btn" data-tf="4h">4H</button>
+          <button class="tf-btn" data-tf="1d">1D</button>
+          <button class="tf-btn" data-tf="1w">1W</button>
+        </div>
+        <button class="fetch-btn" id="smc-coin-fetch-btn"><span class="fetch-icon">⟳</span> ANALYSE</button>
+      </div>
+
+      <!-- SMC Coin Header Bar -->
+      <div class="source-bar smc-coin-header-bar" id="smc-coin-header-bar" style="display:none;">
+        <span class="smc-coin-sym" id="smc-coin-symbol">—</span>
+        <span class="smc-coin-px" id="smc-coin-price">—</span>
+        <span class="smc-coin-change" id="smc-coin-change">—</span>
+        <span class="source-label" style="margin-left:auto;">TF:</span>
+        <span class="source-badge" id="smc-coin-tf-label">—</span>
+        <span class="source-label" style="margin-left:12px;">HTF:</span>
+        <span class="source-badge" id="smc-coin-htf-label">—</span>
+        <span class="source-label" style="margin-left:12px;">HTF BIAS:</span>
+        <span class="source-badge" id="smc-coin-htf-bias">—</span>
+        <span class="source-label" style="margin-left:12px;">UPDATED:</span>
+        <span class="source-badge" id="smc-coin-updated">—</span>
+      </div>
+
+      <div class="empty-state" id="smc-coin-empty">
+        <div class="empty-icon">◎</div>
+        <div class="empty-title">SMC COIN SCANNER</div>
+        <div class="empty-sub">Enter a ticker and select timeframe — full SMC analysis will be generated</div>
+      </div>
+      <div class="loading-state" id="smc-coin-loading" style="display:none;">
+        <div class="loader-ring"></div>
+        <div class="loader-text" id="smc-coin-loader-text">RUNNING SMC ENGINE...</div>
+      </div>
+      <div class="error-state" id="smc-coin-error" style="display:none;">
+        <div class="error-icon">⚠</div>
+        <div class="error-title">SMC ANALYSIS FAILED</div>
+        <div class="error-sub">Insufficient data or coin not found</div>
+      </div>
+
+      <!-- SMC Coin Grid -->
+      <div class="smc-coin-grid" id="smc-coin-grid" style="display:none;">
+
+        <!-- ROW 1: External + Internal Structure -->
+        <div class="smc-grid-row smc-row-structure">
+          <div class="card">
+            <div class="card-header-label"><span class="card-label-icon smc-icon-ext">▸</span> EXTERNAL MARKET STRUCTURE</div>
+            <div id="smc-ext-structure"><div class="smc-placeholder">Awaiting analysis...</div></div>
+          </div>
+          <div class="card">
+            <div class="card-header-label"><span class="card-label-icon smc-icon-int">▸</span> INTERNAL MARKET STRUCTURE</div>
+            <div id="smc-int-structure"><div class="smc-placeholder">Awaiting analysis...</div></div>
+          </div>
+          <div class="card">
+            <div class="card-header-label"><span class="card-label-icon">▸</span> PREMIUM / DISCOUNT ARRAY</div>
+            <div id="smc-pd"><div class="smc-placeholder">Awaiting analysis...</div></div>
+          </div>
+        </div>
+
+        <!-- ROW 2: OB + FVG + EQH/EQL -->
+        <div class="smc-grid-row smc-row-levels">
+          <div class="card">
+            <div class="card-header-label"><span class="card-label-icon smc-icon-ob">▸</span> ORDER BLOCKS</div>
+            <div id="smc-orderblocks"><div class="smc-placeholder">Awaiting analysis...</div></div>
+          </div>
+          <div class="card">
+            <div class="card-header-label"><span class="card-label-icon smc-icon-fvg">▸</span> FAIR VALUE GAPS</div>
+            <div id="smc-fvgs"><div class="smc-placeholder">Awaiting analysis...</div></div>
+          </div>
+          <div class="card">
+            <div class="card-header-label"><span class="card-label-icon smc-icon-liq">▸</span> EQUAL HIGHS / LOWS — LIQUIDITY</div>
+            <div id="smc-eqheql"><div class="smc-placeholder">Awaiting analysis...</div></div>
+          </div>
+        </div>
+
+        <!-- ROW 3: Confluence full width -->
+        <div class="smc-grid-row smc-row-confluence">
+          <div class="card smc-confluence-card">
+            <div class="card-header-label"><span class="card-label-icon smc-icon-conf">▸</span> SMC CONFLUENCE SCORE & TRADE IDEA</div>
+            <div id="smc-confluence"><div class="smc-placeholder">Awaiting analysis...</div></div>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- ═══════════════════════════════════════════
+         TAB 4: SMC MARKET SCANNER
+    ═══════════════════════════════════════════ -->
+    <section class="tab-panel" id="tab-smcscan">
+      <div class="controls-bar">
+        <div class="scanner-source-toggle">
+          <button class="smc-src-btn src-btn active" data-src="binance">BINANCE</button>
+          <button class="smc-src-btn src-btn" data-src="bybit">BYBIT</button>
+        </div>
+        <div class="tf-selector" id="smc-tf-selector-scan">
+          <button class="tf-btn" data-tf="5m">5M</button>
+          <button class="tf-btn" data-tf="15m">15M</button>
+          <button class="tf-btn" data-tf="30m">30M</button>
+          <button class="tf-btn active" data-tf="1h">1H</button>
+          <button class="tf-btn" data-tf="4h">4H</button>
+          <button class="tf-btn" data-tf="1d">1D</button>
+          <button class="tf-btn" data-tf="1w">1W</button>
+        </div>
+        <button class="fetch-btn" id="smc-scan-btn"><span class="fetch-icon">⟳</span> SMC SCAN</button>
+      </div>
+
+      <div class="smc-scan-filters" id="smc-scan-filters">
+        <button class="smc-filter-btn active" data-filter="all">ALL SETUPS</button>
+        <button class="smc-filter-btn" data-filter="long">LONGS ONLY</button>
+        <button class="smc-filter-btn" data-filter="short">SHORTS ONLY</button>
+        <button class="smc-filter-btn" data-filter="watch">WATCH LIST ONLY</button>
+      </div>
+
+      <div class="source-bar" id="smc-scan-stats-bar" style="display:none;">
+        <span class="source-label">SETUPS FOUND:</span><span class="source-badge" id="smc-scan-count">—</span>
+        <span class="source-label" style="margin-left:16px;">PAIRS SCANNED:</span><span class="source-badge" id="smc-scan-scanned">—</span>
+        <span class="source-label" style="margin-left:16px;">TF:</span><span class="source-badge" id="smc-scan-tf-badge">—</span>
+        <span class="source-label" style="margin-left:16px;">MARKET REGIME:</span><span class="source-badge" id="smc-scan-regime">—</span>
+        <span class="source-label" style="margin-left:16px;">UPDATED:</span><span class="source-badge" id="smc-scan-updated">—</span>
+      </div>
+
+      <div class="loading-state" id="smc-scan-loading" style="display:none;">
+        <div class="loader-ring"></div>
+        <div class="loader-text" id="smc-scan-loader-text">INITIALISING SMC SCAN...</div>
+      </div>
+
+      <div class="empty-state" id="smc-scan-empty">
+        <div class="empty-icon">⟁</div>
+        <div class="empty-title">SMC MARKET SCANNER</div>
+        <div class="empty-sub">Hit SMC SCAN to find all actionable setups across the market</div>
+      </div>
+
+      <!-- HEATMAP GRID -->
+      <div class="smc-heatmap-wrapper" id="smc-heatmap-wrapper" style="display:none;">
+        <div class="smc-heatmap-legend">
+          <span class="hml-item hml-long">■ LONG / BULLISH</span>
+          <span class="hml-item hml-short">■ SHORT / BEARISH</span>
+          <span class="hml-item hml-watch">■ WATCH LIST</span>
+          <span class="hml-item hml-live">⚡ = ENTRY NOW</span>
+        </div>
+        <div class="smc-heatmap-section" id="smc-heatmap-strong"></div>
+        <div class="smc-heatmap-section" id="smc-heatmap-watch"></div>
+      </div>
+    </section>
+
+  </main>
+
+
+  <!-- ═══════════════════════════════════════════
+         SMC MODAL — FULL SCREEN OVERLAY
+    ═══════════════════════════════════════════ -->
+    <div class="smc-modal" id="smc-modal">
+
+      <!-- TOP BAR: Symbol · Price · Badge · Close -->
+      <div class="smc-modal-topbar">
+        <span class="smc-modal-symbol" id="modal-symbol">—</span>
+        <span class="smc-modal-price"  id="modal-price">—</span>
+        <span class="smc-modal-change" id="modal-change">—</span>
+        <span class="smc-modal-badge"  id="modal-badge">—</span>
+        <button class="smc-modal-close" id="smc-modal-close">✕ CLOSE</button>
+      </div>
+
+      <!-- META BAR: Score · TF · HTF · Status · Volume -->
+      <div class="smc-modal-metabar">
+        <div class="smc-modal-pill">
+          <span class="smc-pill-label">SCORE</span>
+          <span class="smc-pill-val"   id="modal-score">—</span>
+        </div>
+        <div class="smc-modal-pill">
+          <span class="smc-pill-label">ANALYSING TIMEFRAME</span>
+          <span class="smc-pill-val accent" id="modal-tf">—</span>
+        </div>
+        <div class="smc-modal-pill">
+          <span class="smc-pill-label">HTF STRUCTURE</span>
+          <span class="smc-pill-val"   id="modal-htf">—</span>
+        </div>
+        <div class="smc-modal-pill">
+          <span class="smc-pill-label">TRADE STATUS</span>
+          <span class="smc-pill-val"   id="modal-status">—</span>
+        </div>
+        <div class="smc-modal-pill">
+          <span class="smc-pill-label">24H · VOLUME</span>
+          <span class="smc-pill-val"   id="modal-vol">—</span>
+        </div>
+      </div>
+
+      <!-- TF SWITCHER BAR -->
+      <div class="smc-modal-tfbar">
+        <span class="smc-modal-tf-label">VIEW ON DIFFERENT TF →</span>
+        <div class="smc-modal-tf-btns" id="modal-tf-btns">
+          <button class="modal-tf-btn" data-tf="5m">5M</button>
+          <button class="modal-tf-btn" data-tf="15m">15M</button>
+          <button class="modal-tf-btn" data-tf="30m">30M</button>
+          <button class="modal-tf-btn" data-tf="1h">1H</button>
+          <button class="modal-tf-btn" data-tf="4h">4H</button>
+          <button class="modal-tf-btn" data-tf="1d">1D</button>
+          <button class="modal-tf-btn" data-tf="1w">1W</button>
+        </div>
+      </div>
+
+      <!-- SCROLLABLE BODY -->
+      <div class="smc-modal-body">
+
+        <div class="smc-modal-section">
+          <span class="smc-modal-section-title">MARKET STRUCTURE</span>
+          <span class="smc-modal-section-tag" id="modal-tf-tag">—</span>
+        </div>
+        <div class="smc-modal-row">
+          <div class="smc-modal-card">
+            <div class="card-header-label"><span class="card-label-icon smc-icon-ext">▸</span> EXTERNAL STRUCTURE</div>
+            <div id="modal-ext-structure"></div>
+          </div>
+          <div class="smc-modal-card">
+            <div class="card-header-label"><span class="card-label-icon smc-icon-int">▸</span> INTERNAL STRUCTURE</div>
+            <div id="modal-int-structure"></div>
+          </div>
+          <div class="smc-modal-card">
+            <div class="card-header-label"><span class="card-label-icon">▸</span> PREMIUM / DISCOUNT</div>
+            <div id="modal-pd"></div>
+          </div>
+        </div>
+
+        <div class="smc-modal-section">
+          <span class="smc-modal-section-title">KEY LEVELS</span>
+          <span class="smc-modal-section-tag">REAL-TIME VALIDATED</span>
+        </div>
+        <div class="smc-modal-row">
+          <div class="smc-modal-card">
+            <div class="card-header-label"><span class="card-label-icon smc-icon-ob">▸</span> ORDER BLOCKS</div>
+            <div id="modal-orderblocks"></div>
+          </div>
+          <div class="smc-modal-card">
+            <div class="card-header-label"><span class="card-label-icon smc-icon-fvg">▸</span> FAIR VALUE GAPS</div>
+            <div id="modal-fvgs"></div>
+          </div>
+          <div class="smc-modal-card">
+            <div class="card-header-label"><span class="card-label-icon smc-icon-liq">▸</span> EQUAL HIGHS / LOWS</div>
+            <div id="modal-eqheql"></div>
+          </div>
+        </div>
+
+        <div class="smc-modal-section">
+          <span class="smc-modal-section-title">TRADE IDEA</span>
+          <span class="smc-modal-section-tag">ENTRY · SL · TP1 · TP2 · TP3</span>
+        </div>
+        <div class="smc-modal-row">
+          <div class="smc-modal-card smc-modal-card-full">
+            <div id="modal-confluence"></div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  <footer class="footer">
+    <span>CRYPTEX v2.0 — SMC EDITION</span>
+    <span>NOT FINANCIAL ADVICE. FOR INFORMATIONAL USE ONLY.</span>
+  </footer>
+
+  <script src="main.js"></script>
+</body>
+</html>
