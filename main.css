@@ -1500,10 +1500,40 @@ body {
   }
 }
 
-/* ═══════════════════════════════════════════════════════════════
-   SMC COIN SCANNER — GRID & CARDS
-════════════════════════════════════════════════════════════════ */
+/* ══════════════════════════════════════════════════════════════
+   SMC ENGINE — ALL STYLES
+══════════════════════════════════════════════════════════════ */
 
+/* ── SMC COIN HEADER BAR ────────────────────────────────────── */
+.smc-coin-header-bar {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 16px;
+}
+
+.smc-coin-sym {
+  font-family: var(--font-display);
+  font-size: 1rem;
+  font-weight: 900;
+  color: var(--accent);
+  letter-spacing: 3px;
+}
+
+.smc-coin-px {
+  font-family: var(--font-mono);
+  font-size: 0.9rem;
+  color: var(--text-primary);
+  letter-spacing: 1px;
+}
+
+.smc-coin-change {
+  font-family: var(--font-mono);
+  font-size: 0.8rem;
+  letter-spacing: 1px;
+}
+
+/* ── SMC COIN GRID LAYOUT ───────────────────────────────────── */
 .smc-coin-grid {
   display: flex;
   flex-direction: column;
@@ -1516,7 +1546,10 @@ body {
   gap: 16px;
 }
 
-.smc-row-structure,
+.smc-row-structure {
+  grid-template-columns: 1fr 1fr 1fr;
+}
+
 .smc-row-levels {
   grid-template-columns: 1fr 1fr 1fr;
 }
@@ -1525,83 +1558,1121 @@ body {
   grid-template-columns: 1fr;
 }
 
-.smc-confluence-card {
-  width: 100%;
-}
+/* ── SMC CARD LABEL ICON COLORS ─────────────────────────────── */
+.smc-icon-ext  { color: var(--accent) !important; }
+.smc-icon-int  { color: #b388ff !important; }
+.smc-icon-ob   { color: var(--bull) !important; }
+.smc-icon-fvg  { color: #ffb400 !important; }
+.smc-icon-liq  { color: var(--bear) !important; }
+.smc-icon-conf { color: var(--accent) !important; }
 
+/* ── SMC PLACEHOLDER ────────────────────────────────────────── */
 .smc-placeholder {
   font-family: var(--font-mono);
   font-size: 0.7rem;
   color: var(--text-dim);
+  letter-spacing: 1px;
+  padding: 12px 0;
   text-align: center;
-  padding: 20px;
+}
+
+/* ── SMC DIVIDER ────────────────────────────────────────────── */
+.smc-divider {
+  height: 1px;
+  background: var(--border);
+  margin: 10px 0;
+}
+
+/* ── SMC SECTION LABEL ──────────────────────────────────────── */
+.smc-section-label {
+  font-family: var(--font-mono);
+  font-size: 0.58rem;
+  color: var(--text-dim);
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  display: block;
+}
+
+/* ── SMC BIAS HEADER ────────────────────────────────────────── */
+.smc-bias-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 10px;
+}
+
+.smc-bias-badge {
+  font-family: var(--font-display);
+  font-size: 0.7rem;
+  font-weight: 700;
+  letter-spacing: 2px;
+  padding: 3px 10px;
+  border-radius: 2px;
+}
+
+.smc-bias-badge.bull {
+  color: var(--bull);
+  background: var(--bull-glow);
+  border: 1px solid rgba(0,230,118,0.25);
+}
+
+.smc-bias-badge.bear {
+  color: var(--bear);
+  background: var(--bear-glow);
+  border: 1px solid rgba(255,61,87,0.25);
+}
+
+.smc-bias-badge.accent {
+  color: var(--accent);
+  background: var(--accent-glow);
+  border: 1px solid rgba(0,212,255,0.25);
+}
+
+/* ── SWING TRAIL PILLS ──────────────────────────────────────── */
+.smc-swing-trail {
+  display: flex;
+  gap: 4px;
+  flex-wrap: wrap;
+  margin-bottom: 10px;
+}
+
+.smc-swing-pill {
+  font-family: var(--font-mono);
+  font-size: 0.65rem;
+  font-weight: 700;
+  letter-spacing: 1px;
+  padding: 3px 8px;
+  border-radius: 2px;
+  border: 1px solid transparent;
+}
+
+.smc-swing-pill.bull {
+  color: var(--bull);
+  background: var(--bull-glow);
+  border-color: rgba(0,230,118,0.2);
+}
+
+.smc-swing-pill.bear {
+  color: var(--bear);
+  background: var(--bear-glow);
+  border-color: rgba(255,61,87,0.2);
+}
+
+.smc-swing-pill.accent {
+  color: var(--accent);
+  background: var(--accent-glow);
+  border-color: rgba(0,212,255,0.2);
+}
+
+/* ── SMC EVENT ROWS (BOS / MSS) ─────────────────────────────── */
+.smc-event-row {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 5px 8px;
+  border-radius: var(--radius);
+  margin-bottom: 4px;
+  border: 1px solid transparent;
+}
+
+.smc-bos {
+  background: rgba(0,212,255,0.04);
+  border-color: rgba(0,212,255,0.12);
+}
+
+.smc-mss {
+  background: rgba(255,180,0,0.06);
+  border-color: rgba(255,180,0,0.18);
+}
+
+.smc-event-tag {
+  font-family: var(--font-display);
+  font-size: 0.6rem;
+  font-weight: 700;
+  letter-spacing: 1px;
+  min-width: 36px;
+}
+
+.smc-tag-bos { color: var(--accent); }
+
+.smc-tag-mss {
+  color: #ffb400;
+}
+
+.smc-event-dir {
+  font-family: var(--font-mono);
+  font-size: 0.65rem;
+  letter-spacing: 1px;
+  flex: 1;
+}
+
+.smc-event-price {
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  color: var(--text-primary);
+  letter-spacing: 0.5px;
+}
+
+/* ── SMC LEVEL ROWS ─────────────────────────────────────────── */
+.smc-level-row {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 4px 0;
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+}
+
+.smc-level-tag {
+  font-size: 0.58rem;
+  font-weight: 700;
+  letter-spacing: 1px;
+  min-width: 38px;
+}
+
+.smc-level-tag.bull { color: var(--bull); }
+.smc-level-tag.bear { color: var(--bear); }
+.smc-level-tag.accent { color: var(--accent); }
+
+.smc-level-price {
+  color: var(--text-primary);
+  flex: 1;
+}
+
+.smc-level-touches {
+  font-size: 0.6rem;
+  color: var(--text-dim);
+  min-width: 22px;
+}
+
+.smc-level-dist {
+  font-size: 0.65rem;
+  min-width: 52px;
+  text-align: right;
+}
+
+/* ── SMC STATE BADGES ───────────────────────────────────────── */
+.smc-state-badge {
+  font-family: var(--font-mono);
+  font-size: 0.55rem;
+  letter-spacing: 1px;
+  padding: 2px 6px;
+  border-radius: 2px;
+  border: 1px solid transparent;
+  white-space: nowrap;
+}
+
+.smc-state-untested {
+  color: var(--accent);
+  background: rgba(0,212,255,0.07);
+  border-color: rgba(0,212,255,0.2);
+}
+
+.smc-state-tested {
+  color: #ffb400;
+  background: rgba(255,180,0,0.07);
+  border-color: rgba(255,180,0,0.2);
+}
+
+.smc-state-mitigated {
+  color: #b388ff;
+  background: rgba(179,136,255,0.07);
+  border-color: rgba(179,136,255,0.2);
+}
+
+.smc-state-broken {
+  color: var(--bear);
+  background: var(--bear-glow);
+  border-color: rgba(255,61,87,0.2);
+}
+
+.smc-state-flipped {
+  color: #ff8c42;
+  background: rgba(255,140,66,0.08);
+  border-color: rgba(255,140,66,0.2);
+}
+
+.smc-state-swept {
+  color: var(--bull);
+  background: var(--bull-glow);
+  border-color: rgba(0,230,118,0.2);
+}
+
+/* ── SMC DIST BADGES ────────────────────────────────────────── */
+.smc-dist-inside {
+  color: #ffb400;
+  font-weight: 700;
+}
+
+.smc-dist-above { color: var(--text-secondary); }
+.smc-dist-below { color: var(--text-secondary); }
+
+/* ── ORDER BLOCK CARDS ──────────────────────────────────────── */
+.smc-ob-card,
+.smc-fvg-card {
+  padding: 8px 10px;
+  border-radius: var(--radius);
+  border: 1px solid transparent;
+  margin-bottom: 6px;
+}
+
+.smc-ob-bull {
+  background: rgba(0,230,118,0.04);
+  border-color: rgba(0,230,118,0.15);
+}
+
+.smc-ob-bear {
+  background: rgba(255,61,87,0.04);
+  border-color: rgba(255,61,87,0.15);
+}
+
+.smc-ob-header {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 4px;
+  flex-wrap: wrap;
+}
+
+.smc-ob-label {
+  font-family: var(--font-mono);
+  font-size: 0.6rem;
+  font-weight: 700;
   letter-spacing: 1px;
 }
 
-/* SMC icon colours */
-.smc-icon-ext  { color: #00d4ff !important; }
-.smc-icon-int  { color: #8a6fff !important; }
-.smc-icon-ob   { color: #ff9500 !important; }
-.smc-icon-fvg  { color: #00e676 !important; }
-.smc-icon-liq  { color: #ffb400 !important; }
-.smc-icon-conf { color: #00d4ff !important; }
+.smc-ob-range {
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  color: var(--text-primary);
+  letter-spacing: 0.5px;
+  margin-bottom: 4px;
+}
 
-/* SMC Coin header bar extras */
-.smc-coin-sym {
+.smc-ob-meta {
+  display: flex;
+  gap: 12px;
+  font-family: var(--font-mono);
+  font-size: 0.6rem;
+  color: var(--text-dim);
+  letter-spacing: 0.5px;
+  flex-wrap: wrap;
+}
+
+.smc-approaching {
+  font-family: var(--font-mono);
+  font-size: 0.58rem;
+  color: #ffb400;
+  letter-spacing: 1px;
+  animation: blink 1s ease-in-out infinite;
+}
+
+/* ── INTERNAL STRUCTURE STATUS ──────────────────────────────── */
+.smc-status-banner {
   font-family: var(--font-display);
-  font-size: 1rem;
+  font-size: 0.7rem;
+  font-weight: 700;
+  letter-spacing: 2px;
+  padding: 5px 10px;
+  border-radius: var(--radius);
+  text-align: center;
+  margin-bottom: 6px;
+}
+
+.smc-status-entry {
+  color: var(--bull);
+  background: var(--bull-glow);
+  border: 1px solid rgba(0,230,118,0.2);
+}
+
+.smc-status-pullback {
+  color: #ffb400;
+  background: rgba(255,180,0,0.07);
+  border: 1px solid rgba(255,180,0,0.2);
+}
+
+.smc-status-neutral {
+  color: var(--text-secondary);
+  background: var(--bg-elevated);
+  border: 1px solid var(--border);
+}
+
+.smc-status-desc {
+  font-family: var(--font-mono);
+  font-size: 0.62rem;
+  color: var(--text-secondary);
+  letter-spacing: 0.5px;
+  line-height: 1.5;
+  margin-bottom: 8px;
+}
+
+/* ── PREMIUM / DISCOUNT ─────────────────────────────────────── */
+.smc-pd-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 10px;
+}
+
+.smc-pd-meter-wrap {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 6px;
+}
+
+.smc-pd-label-l,
+.smc-pd-label-r {
+  font-family: var(--font-mono);
+  font-size: 0.55rem;
+  color: var(--text-dim);
+  letter-spacing: 1px;
+  white-space: nowrap;
+}
+
+.smc-pd-label-l { color: var(--bull-dim); }
+.smc-pd-label-r { color: var(--bear-dim); }
+
+.smc-pd-meter {
+  flex: 1;
+  height: 8px;
+  background: var(--bg-elevated);
+  border: 1px solid var(--border);
+  border-radius: 4px;
+  position: relative;
+  overflow: visible;
+}
+
+.smc-pd-eq-line {
+  position: absolute;
+  left: 50%;
+  top: -3px;
+  bottom: -3px;
+  width: 1px;
+  background: var(--accent);
+  opacity: 0.4;
+}
+
+.smc-pd-cursor {
+  position: absolute;
+  top: -4px;
+  width: 3px;
+  height: 16px;
+  background: var(--accent);
+  border-radius: 2px;
+  transform: translateX(-50%);
+  box-shadow: 0 0 6px var(--accent);
+  z-index: 2;
+}
+
+.smc-pd-fill-disc {
+  position: absolute;
+  left: 0;
+  top: 0;
+  bottom: 0;
+  background: rgba(0,230,118,0.3);
+  border-radius: 4px 0 0 4px;
+}
+
+.smc-pd-fill-prem {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  background: rgba(255,61,87,0.3);
+  border-radius: 0 4px 4px 0;
+}
+
+.smc-pd-pct {
+  font-family: var(--font-display);
+  font-size: 0.75rem;
+  font-weight: 700;
+  letter-spacing: 2px;
+  text-align: center;
+  margin-bottom: 10px;
+}
+
+/* ── FIBONACCI LIST ─────────────────────────────────────────── */
+.smc-fib-list {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.smc-fib-row {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 3px 6px;
+  border-radius: 2px;
+  transition: background 0.1s;
+}
+
+.smc-fib-row:hover { background: var(--bg-elevated); }
+
+.smc-fib-current {
+  background: rgba(0,212,255,0.07) !important;
+  border: 1px solid rgba(0,212,255,0.2);
+}
+
+.smc-fib-label {
+  font-family: var(--font-mono);
+  font-size: 0.6rem;
+  color: var(--text-dim);
+  letter-spacing: 0.5px;
+  flex: 1;
+}
+
+.smc-fib-price {
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  color: var(--text-primary);
+  letter-spacing: 0.5px;
+}
+
+.smc-fib-here {
+  font-family: var(--font-mono);
+  font-size: 0.6rem;
+  color: var(--accent);
+  letter-spacing: 1px;
+  animation: blink 1s ease-in-out infinite;
+}
+
+/* ── CONFLUENCE CARD ────────────────────────────────────────── */
+.smc-confluence-card .smc-conf-main {
+  display: flex;
+  align-items: center;
+  gap: 24px;
+  margin-bottom: 10px;
+}
+
+.smc-conf-score-wrap {
+  text-align: center;
+}
+
+.smc-conf-score {
+  font-family: var(--font-display);
+  font-size: 2.4rem;
   font-weight: 900;
+  letter-spacing: 2px;
+  line-height: 1;
+}
+
+.smc-conf-label {
+  font-family: var(--font-mono);
+  font-size: 0.58rem;
+  color: var(--text-dim);
+  letter-spacing: 2px;
+  margin-top: 4px;
+}
+
+.smc-conf-idea-wrap {
+  flex: 1;
+}
+
+.smc-conf-idea {
+  font-family: var(--font-display);
+  font-size: 1.2rem;
+  font-weight: 700;
+  letter-spacing: 3px;
+  margin-bottom: 6px;
+}
+
+.smc-conf-badge {
+  font-family: var(--font-mono);
+  font-size: 0.65rem;
+  letter-spacing: 2px;
+  padding: 3px 10px;
+  border-radius: 2px;
+  display: inline-block;
+}
+
+.smc-conf-high {
+  color: var(--bull);
+  background: var(--bull-glow);
+  border: 1px solid rgba(0,230,118,0.25);
+}
+
+.smc-conf-med {
+  color: #ffb400;
+  background: rgba(255,180,0,0.08);
+  border: 1px solid rgba(255,180,0,0.2);
+}
+
+.smc-conf-low {
+  color: var(--text-secondary);
+  background: var(--bg-elevated);
+  border: 1px solid var(--border);
+}
+
+/* ── REASONS LIST ───────────────────────────────────────────── */
+.smc-reasons {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  margin-bottom: 2px;
+}
+
+.smc-reason {
+  font-family: var(--font-mono);
+  font-size: 0.68rem;
+  letter-spacing: 0.5px;
+  padding: 3px 0;
+}
+
+/* ── TRADE IDEA ROWS ────────────────────────────────────────── */
+.smc-trade-idea {
+  display: flex;
+  gap: 16px;
+  flex-wrap: wrap;
+}
+
+.smc-trade-row {
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+}
+
+.smc-trade-label {
+  font-family: var(--font-mono);
+  font-size: 0.55rem;
+  color: var(--text-dim);
+  letter-spacing: 2px;
+}
+
+.smc-trade-val {
+  font-family: var(--font-mono);
+  font-size: 0.8rem;
+  color: var(--text-primary);
+  letter-spacing: 0.5px;
+}
+
+.smc-trade-type {
+  font-size: 0.6rem;
+  color: var(--text-dim);
+}
+
+/* ── SMC SCAN INFO BAR ──────────────────────────────────────── */
+.smc-scan-info-bar {
+  font-family: var(--font-mono);
+  font-size: 0.65rem;
+  color: var(--text-dim);
+  letter-spacing: 0.5px;
+  padding: 8px 12px;
+  background: var(--bg-elevated);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  margin-bottom: 12px;
+}
+
+/* ── SMC SCAN TABLE ─────────────────────────────────────────── */
+.smc-scan-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-family: var(--font-mono);
+  font-size: 0.73rem;
+}
+
+.smc-scan-table thead tr {
+  background: var(--bg-elevated);
+  border-bottom: 1px solid var(--border-bright);
+}
+
+.smc-scan-table th {
+  padding: 10px 14px;
+  text-align: left;
+  font-size: 0.58rem;
+  letter-spacing: 2px;
+  color: var(--text-dim);
+  font-weight: 600;
+  white-space: nowrap;
+}
+
+.smc-scan-table tbody tr {
+  border-bottom: 1px solid var(--border);
+  transition: background 0.1s ease;
+  cursor: pointer;
+}
+
+.smc-scan-table tbody tr:hover {
+  background: var(--bg-card-hover);
+}
+
+.smc-scan-table td {
+  padding: 9px 14px;
+  white-space: nowrap;
+  color: var(--text-primary);
+  letter-spacing: 0.5px;
+}
+
+.smc-scan-table td.symbol-cell {
+  font-weight: 700;
+  color: var(--accent);
+  letter-spacing: 1px;
+  font-size: 0.8rem;
+}
+
+.smc-scan-table td.rank-cell {
+  color: var(--text-dim);
+  font-size: 0.65rem;
+}
+
+.smc-scan-row:hover td.symbol-cell {
+  text-decoration: underline;
+  text-underline-offset: 2px;
+}
+
+/* ── SMC RESPONSIVE ─────────────────────────────────────────── */
+@media (max-width: 1280px) {
+  .smc-row-structure,
+  .smc-row-levels {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+
+@media (max-width: 900px) {
+  .smc-row-structure,
+  .smc-row-levels {
+    grid-template-columns: 1fr;
+  }
+
+  .smc-conf-main {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 12px;
+  }
+
+  .smc-trade-idea {
+    flex-direction: column;
+    gap: 10px;
+  }
+}
+
+/* ── CONFLUENCE CARD — PRICE + COPY ─────────────────────────── */
+.smc-conf-price-wrap {
+  margin-left: auto;
+  text-align: right;
+}
+
+.smc-conf-cur-label {
+  font-family: var(--font-mono);
+  font-size: 0.55rem;
+  color: var(--text-dim);
+  letter-spacing: 2px;
+  margin-bottom: 3px;
+}
+
+.smc-conf-cur-price {
+  font-family: var(--font-display);
+  font-size: 1.1rem;
+  font-weight: 700;
   color: var(--accent);
   letter-spacing: 2px;
 }
 
-.smc-coin-px {
+.smc-copy-btn {
+  background: transparent;
+  border: 1px solid var(--border-bright);
+  color: var(--text-secondary);
   font-family: var(--font-mono);
-  font-size: 0.85rem;
-  color: var(--text-primary);
+  font-size: 0.65rem;
   letter-spacing: 1px;
+  padding: 8px 14px;
+  border-radius: var(--radius);
+  cursor: pointer;
+  transition: all 0.2s ease;
+  white-space: nowrap;
+  align-self: flex-start;
+  margin-left: 12px;
 }
 
-.smc-coin-change {
-  font-family: var(--font-mono);
-  font-size: 0.8rem;
-  letter-spacing: 1px;
+.smc-copy-btn:hover {
+  border-color: var(--accent);
+  color: var(--accent);
+  background: var(--accent-glow);
 }
 
-/* ═══════════════════════════════════════════════════════════════
-   SMC MARKET SCANNER — HEATMAP
-════════════════════════════════════════════════════════════════ */
+.smc-copy-btn.copied {
+  border-color: var(--bull);
+  color: var(--bull);
+  background: var(--bull-glow);
+}
 
-.smc-heatmap-wrapper {
+/* ── TRADE IDEA TP ROW ──────────────────────────────────────── */
+.smc-tp-row {
+  display: flex;
+  gap: 16px;
+  flex-wrap: wrap;
+}
+
+.smc-tp-row .smc-trade-row {
+  flex: 1;
+  min-width: 120px;
+}
+
+/* ── SMC TRADE ROW REFINEMENTS ──────────────────────────────── */
+.smc-trade-idea {
   display: flex;
   flex-direction: column;
-  gap: 20px;
-  animation: fadeIn 0.3s ease forwards;
+  gap: 10px;
+}
+
+.smc-trade-row {
+  display: flex;
+  align-items: baseline;
+  gap: 10px;
+}
+
+.smc-trade-label {
+  font-family: var(--font-mono);
+  font-size: 0.58rem;
+  color: var(--text-dim);
+  letter-spacing: 2px;
+  min-width: 110px;
+  flex-shrink: 0;
+}
+
+.smc-trade-val {
+  font-family: var(--font-mono);
+  font-size: 0.82rem;
+  color: var(--text-primary);
+  letter-spacing: 0.5px;
+  font-weight: 600;
+}
+
+.smc-trade-type {
+  font-family: var(--font-mono);
+  font-size: 0.6rem;
+  color: var(--text-dim);
+  letter-spacing: 0.5px;
+}
+
+/* ══════════════════════════════════════════════════════════════
+   SMC REAL-TIME STATUS STYLES
+══════════════════════════════════════════════════════════════ */
+
+/* ── TRADE STATUS BANNER ────────────────────────────────────── */
+.smc-realtime-banner {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 10px 14px;
+  border-radius: var(--radius);
+  border: 1px solid transparent;
+  margin: 10px 0;
+}
+
+.smc-rt-icon {
+  font-size: 1.2rem;
+  min-width: 24px;
+  text-align: center;
+}
+
+.smc-rt-text { flex: 1; }
+
+.smc-rt-status {
+  font-family: var(--font-display);
+  font-size: 0.75rem;
+  font-weight: 700;
+  letter-spacing: 2px;
+  margin-bottom: 3px;
+}
+
+.smc-rt-note {
+  font-family: var(--font-mono);
+  font-size: 0.65rem;
+  letter-spacing: 0.5px;
+  opacity: 0.85;
+  line-height: 1.4;
+}
+
+/* Status variants */
+.smc-status-live {
+  background: rgba(0,230,118,0.1);
+  border-color: rgba(0,230,118,0.3);
+  color: var(--bull);
+  animation: pulse-border-green 1.5s ease-in-out infinite;
+}
+
+.smc-status-waiting {
+  background: rgba(0,212,255,0.06);
+  border-color: rgba(0,212,255,0.2);
+  color: var(--accent);
+}
+
+.smc-status-tp1 {
+  background: rgba(0,230,118,0.07);
+  border-color: rgba(0,230,118,0.2);
+  color: var(--bull);
+}
+
+.smc-status-tp2 {
+  background: rgba(0,230,118,0.1);
+  border-color: rgba(0,230,118,0.25);
+  color: var(--bull);
+}
+
+.smc-status-tp3 {
+  background: rgba(0,230,118,0.14);
+  border-color: rgba(0,230,118,0.35);
+  color: var(--bull);
+}
+
+.smc-status-missed {
+  background: rgba(255,180,0,0.07);
+  border-color: rgba(255,180,0,0.2);
+  color: #ffb400;
+}
+
+.smc-status-invalidated {
+  background: rgba(255,61,87,0.08);
+  border-color: rgba(255,61,87,0.25);
+  color: var(--bear);
+}
+
+.smc-status-complete {
+  background: rgba(179,136,255,0.08);
+  border-color: rgba(179,136,255,0.2);
+  color: #b388ff;
+}
+
+.smc-status-monitoring {
+  background: var(--bg-elevated);
+  border-color: var(--border);
+  color: var(--text-secondary);
+}
+
+@keyframes pulse-border-green {
+  0%, 100% { border-color: rgba(0,230,118,0.3); box-shadow: none; }
+  50%       { border-color: rgba(0,230,118,0.6); box-shadow: 0 0 12px rgba(0,230,118,0.15); }
+}
+
+/* ── ENTRY STATUS BADGES ────────────────────────────────────── */
+.smc-entry-badge {
+  font-family: var(--font-mono);
+  font-size: 0.58rem;
+  letter-spacing: 1px;
+  padding: 2px 7px;
+  border-radius: 2px;
+  border: 1px solid transparent;
+  font-weight: 600;
+}
+
+.smc-entry-live {
+  color: var(--bull);
+  background: var(--bull-glow);
+  border-color: rgba(0,230,118,0.3);
+  animation: blink 0.8s ease-in-out infinite;
+}
+
+.smc-entry-waiting {
+  color: var(--accent);
+  background: var(--accent-glow);
+  border-color: rgba(0,212,255,0.2);
+}
+
+.smc-entry-missed {
+  color: #ffb400;
+  background: rgba(255,180,0,0.07);
+  border-color: rgba(255,180,0,0.2);
+}
+
+.smc-entry-invalidated {
+  color: var(--bear);
+  background: var(--bear-glow);
+  border-color: rgba(255,61,87,0.2);
+}
+
+.smc-entry-note {
+  font-family: var(--font-mono);
+  font-size: 0.62rem;
+  color: var(--text-secondary);
+  letter-spacing: 0.5px;
+  padding: 3px 0 6px 0;
+  line-height: 1.4;
+}
+
+/* ── TP HIT STATES ──────────────────────────────────────────── */
+.smc-tp-hit {
+  font-family: var(--font-mono);
+  font-size: 0.58rem;
+  color: var(--bull);
+  letter-spacing: 1px;
+  padding: 2px 6px;
+  background: var(--bull-glow);
+  border: 1px solid rgba(0,230,118,0.25);
+  border-radius: 2px;
+}
+
+.smc-tp-hit-val {
+  text-decoration: line-through;
+  opacity: 0.6;
+}
+
+.smc-sl-hit {
+  font-family: var(--font-mono);
+  font-size: 0.58rem;
+  color: var(--bear);
+  letter-spacing: 1px;
+  padding: 2px 6px;
+  background: var(--bear-glow);
+  border: 1px solid rgba(255,61,87,0.25);
+  border-radius: 2px;
+  font-weight: 700;
+}
+
+.smc-tp-action {
+  font-family: var(--font-mono);
+  font-size: 0.58rem;
+  color: #ffb400;
+  letter-spacing: 0.5px;
+}
+
+.smc-row-hit {
+  opacity: 0.7;
+}
+
+.smc-row-invalidated {
+  background: rgba(255,61,87,0.04);
+  border-radius: 3px;
+  padding: 3px 4px;
+}
+
+/* ── STALE LEVEL INDICATOR ──────────────────────────────────── */
+.smc-ob-stale {
+  font-family: var(--font-mono);
+  font-size: 0.58rem;
+  color: var(--text-dim);
+  letter-spacing: 0.5px;
+}
+
+.smc-level-stale {
+  opacity: 0.5;
+}
+
+.smc-ob-active {
+  box-shadow: 0 0 0 1px rgba(0,212,255,0.4);
+}
+
+/* ── SMC SCAN FILTER BUTTONS ────────────────────────────────── */
+.smc-scan-filters {
+  display: flex;
+  gap: 8px;
+  margin-bottom: 12px;
+  flex-wrap: wrap;
+}
+
+.smc-filter-btn {
+  font-family: var(--font-mono);
+  font-size: 0.65rem;
+  letter-spacing: 2px;
+  padding: 7px 16px;
+  border-radius: var(--radius);
+  border: 1px solid var(--border);
+  background: var(--bg-elevated);
+  color: var(--text-secondary);
+  cursor: pointer;
+  transition: all 0.15s ease;
+}
+
+.smc-filter-btn:hover {
+  border-color: var(--accent);
+  color: var(--accent);
+}
+
+.smc-filter-btn.active[data-filter="all"] {
+  border-color: var(--accent);
+  background: var(--accent-glow);
+  color: var(--accent);
+}
+
+.smc-filter-btn.active[data-filter="long"] {
+  border-color: var(--bull);
+  background: var(--bull-glow);
+  color: var(--bull);
+}
+
+.smc-filter-btn.active[data-filter="short"] {
+  border-color: var(--bear);
+  background: var(--bear-glow);
+  color: var(--bear);
+}
+
+.smc-filter-btn.active[data-filter="wait"] {
+  border-color: #ffb400;
+  background: rgba(255,180,0,0.08);
+  color: #ffb400;
+}
+
+/* ── TP R BADGE & SOURCE LABEL ──────────────────────────────── */
+.smc-tp-rr {
+  font-family: var(--font-mono);
+  font-size: 0.6rem;
+  letter-spacing: 1px;
+  padding: 2px 6px;
+  border-radius: 2px;
+  background: rgba(0,212,255,0.08);
+  border: 1px solid rgba(0,212,255,0.2);
+  color: var(--accent);
+  font-weight: 700;
+  white-space: nowrap;
+}
+
+.smc-tp-src {
+  font-family: var(--font-mono);
+  font-size: 0.58rem;
+  color: var(--text-dim);
+  letter-spacing: 0.5px;
+  font-style: italic;
+}
+
+/* ── SMC SCAN SECTION HEADERS ───────────────────────────────── */
+.smc-section-header td {
+  padding: 8px 14px;
+  font-family: var(--font-mono);
+  font-size: 0.62rem;
+  letter-spacing: 2px;
+  color: var(--accent);
+  background: rgba(0,212,255,0.05);
+  border-top: 1px solid rgba(0,212,255,0.15);
+  border-bottom: 1px solid rgba(0,212,255,0.1);
+}
+
+.smc-section-header:nth-of-type(2) td {
+  color: #ffb400;
+  background: rgba(255,180,0,0.04);
+  border-top-color: rgba(255,180,0,0.15);
+  border-bottom-color: rgba(255,180,0,0.1);
+}
+
+/* ══════════════════════════════════════════════════════════════
+   SMC HEATMAP
+══════════════════════════════════════════════════════════════ */
+
+.smc-heatmap-wrapper {
+  display: none;
+  flex-direction: column;
+  gap: 24px;
+  padding-bottom: 40px;
 }
 
 .smc-heatmap-legend {
   display: flex;
   align-items: center;
   gap: 20px;
-  padding: 10px 16px;
-  background: var(--bg-card);
-  border: 1px solid var(--border);
-  border-radius: var(--radius);
+  padding: 8px 0;
   flex-wrap: wrap;
 }
 
 .hml-item {
   font-family: var(--font-mono);
-  font-size: 0.65rem;
+  font-size: 0.62rem;
   letter-spacing: 1px;
-  display: flex;
-  align-items: center;
-  gap: 6px;
+  color: var(--text-dim);
 }
 
 .hml-long  { color: var(--bull); }
 .hml-short { color: var(--bear); }
-.hml-watch { color: var(--text-secondary); }
+.hml-watch { color: #ffb400; }
 .hml-live  { color: var(--accent); }
 
 .smc-heatmap-section {
@@ -1611,187 +2682,232 @@ body {
 }
 
 .heatmap-section-label {
-  font-family: var(--font-mono);
-  font-size: 0.7rem;
+  font-family: var(--font-display);
+  font-size: 0.65rem;
+  font-weight: 700;
+  letter-spacing: 3px;
   color: var(--accent);
-  letter-spacing: 2px;
-  padding: 6px 0;
+  padding-bottom: 6px;
   border-bottom: 1px solid var(--border);
 }
 
+.smc-heatmap-section:nth-child(3) .heatmap-section-label {
+  color: #ffb400;
+}
+
+/* ── HEATMAP GRID ───────────────────────────────────────────── */
 .heatmap-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
+  grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
   gap: 8px;
 }
 
-/* Heatmap Tiles */
+/* ── HEATMAP TILE ───────────────────────────────────────────── */
 .hm-tile {
-  background: var(--bg-card);
-  border: 1px solid var(--border);
-  border-radius: var(--radius-lg);
+  position: relative;
+  border-radius: 6px;
   padding: 12px 10px;
   cursor: pointer;
-  transition: all 0.15s ease;
-  position: relative;
+  border: 1px solid transparent;
+  transition: transform 0.12s ease, box-shadow 0.12s ease, border-color 0.12s ease;
+  user-select: none;
   overflow: hidden;
-  display: flex;
-  flex-direction: column;
-  gap: 3px;
 }
 
 .hm-tile::before {
   content: '';
   position: absolute;
-  top: 0; left: 0; right: 0;
-  height: 2px;
+  inset: 0;
+  opacity: 0.06;
+  background: currentColor;
+  border-radius: inherit;
+  pointer-events: none;
 }
 
 .hm-tile:hover {
   transform: translateY(-2px);
-  box-shadow: 0 6px 24px rgba(0,0,0,0.4);
+  box-shadow: 0 6px 20px rgba(0,0,0,0.4);
 }
 
-.hm-tile.hm-long {
-  border-color: rgba(0, 230, 118, 0.25);
-  background: rgba(0, 230, 118, 0.04);
+/* Tile variants */
+.hm-long {
+  background: rgba(0,230,118,0.08);
+  border-color: rgba(0,230,118,0.25);
+  color: var(--bull);
 }
-.hm-tile.hm-long::before { background: var(--bull); }
 
-.hm-tile.hm-short {
-  border-color: rgba(255, 61, 87, 0.25);
-  background: rgba(255, 61, 87, 0.04);
+.hm-long:hover {
+  border-color: rgba(0,230,118,0.5);
+  box-shadow: 0 6px 20px rgba(0,230,118,0.15);
 }
-.hm-tile.hm-short::before { background: var(--bear); }
 
-.hm-tile.hm-watch {
-  border-color: rgba(100, 130, 170, 0.25);
-  background: rgba(100, 130, 170, 0.04);
+.hm-short {
+  background: rgba(255,61,87,0.08);
+  border-color: rgba(255,61,87,0.25);
+  color: var(--bear);
 }
-.hm-tile.hm-watch::before { background: var(--neutral); }
 
-.hm-tile.hm-neutral {
+.hm-short:hover {
+  border-color: rgba(255,61,87,0.5);
+  box-shadow: 0 6px 20px rgba(255,61,87,0.15);
+}
+
+.hm-watch {
+  background: rgba(255,180,0,0.07);
+  border-color: rgba(255,180,0,0.2);
+  color: #ffb400;
+}
+
+.hm-watch:hover {
+  border-color: rgba(255,180,0,0.4);
+  box-shadow: 0 6px 20px rgba(255,180,0,0.1);
+}
+
+.hm-neutral {
+  background: var(--bg-elevated);
   border-color: var(--border);
+  color: var(--text-secondary);
 }
-.hm-tile.hm-neutral::before { background: var(--text-dim); }
 
-.hm-tile.hm-live {
-  box-shadow: 0 0 12px rgba(0, 212, 255, 0.15);
-  border-color: rgba(0, 212, 255, 0.4) !important;
+/* Live entry pulse */
+.hm-live {
+  animation: hm-live-pulse 2s ease-in-out infinite;
 }
-.hm-tile.hm-live::before { background: var(--accent) !important; }
 
+@keyframes hm-live-pulse {
+  0%, 100% { box-shadow: 0 0 0 0 rgba(0,212,255,0); }
+  50%       { box-shadow: 0 0 0 4px rgba(0,212,255,0.15); border-color: var(--accent) !important; }
+}
+
+/* Tile content */
 .hm-sym {
   font-family: var(--font-display);
-  font-size: 0.8rem;
+  font-size: 0.82rem;
   font-weight: 900;
-  color: var(--text-primary);
   letter-spacing: 1px;
-  line-height: 1;
+  color: inherit;
+  margin-bottom: 4px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 
 .hm-price {
   font-family: var(--font-mono);
   font-size: 0.65rem;
-  color: var(--text-secondary);
+  color: var(--text-primary);
   letter-spacing: 0.5px;
+  margin-bottom: 6px;
 }
 
 .hm-score {
-  font-family: var(--font-mono);
-  font-size: 0.8rem;
-  font-weight: 700;
+  font-family: var(--font-display);
+  font-size: 1rem;
+  font-weight: 900;
   letter-spacing: 1px;
-  margin-top: 2px;
+  color: inherit;
+  margin-bottom: 4px;
 }
-
-.hm-tile.hm-long  .hm-score { color: var(--bull); }
-.hm-tile.hm-short .hm-score { color: var(--bear); }
-.hm-tile.hm-watch .hm-score { color: var(--text-secondary); }
 
 .hm-status {
   font-family: var(--font-mono);
-  font-size: 0.6rem;
-  color: var(--accent);
+  font-size: 0.55rem;
   letter-spacing: 0.5px;
+  color: inherit;
+  opacity: 0.85;
+  margin-bottom: 3px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 
 .hm-int {
   font-family: var(--font-mono);
-  font-size: 0.58rem;
-  color: var(--text-dim);
+  font-size: 0.52rem;
   letter-spacing: 0.5px;
+  color: var(--text-dim);
+  margin-bottom: 4px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 
 .hm-chg {
   font-family: var(--font-mono);
-  font-size: 0.65rem;
+  font-size: 0.6rem;
+  font-weight: 600;
   letter-spacing: 0.5px;
-  margin-top: 2px;
 }
 
 .hm-chg-up { color: var(--bull); }
 .hm-chg-dn { color: var(--bear); }
 
-/* scan filter buttons */
-.smc-scan-filters {
-  display: flex;
-  gap: 6px;
-  margin-bottom: 12px;
-  flex-wrap: wrap;
+
+/* Active = the TF this drawer was scanned on */
+.drawer-tf-btn.active {
+  border-color: var(--accent);
+  background: var(--accent-glow);
+  color: var(--accent);
+  font-weight: 600;
+  cursor: default;
+  pointer-events: none;
 }
 
-.smc-filter-btn {
-  background: var(--bg-card);
-  border: 1px solid var(--border);
-  color: var(--text-dim);
-  font-family: var(--font-body);
-  font-size: 0.7rem;
-  font-weight: 600;
+/* Close button — make it more visible */
+.smc-drawer-close {
+  font-family: var(--font-mono);
+  font-size: 0.62rem;
   letter-spacing: 1.5px;
-  padding: 7px 14px;
+  padding: 6px 14px;
+  border: 1px solid var(--border-bright);
+  background: transparent;
+  color: var(--text-secondary);
   border-radius: var(--radius);
   cursor: pointer;
   transition: all 0.15s ease;
+  flex-shrink: 0;
+  white-space: nowrap;
+}
+.smc-drawer-close:hover {
+  border-color: var(--bear);
+  color: var(--bear);
+  background: var(--bear-glow);
 }
 
-.smc-filter-btn:hover {
-  border-color: var(--border-bright);
-  color: var(--text-primary);
-}
-
-.smc-filter-btn.active {
-  background: var(--bg-elevated);
-  border-color: var(--accent);
-  color: var(--accent);
-}
-
-/* ═══════════════════════════════════════════════════════════════
-   SMC MODAL / DRAWER
-════════════════════════════════════════════════════════════════ */
+/* ══════════════════════════════════════════════════════════════
+   SMC MODAL — FULL SCREEN OVERLAY (replaces drawer)
+   position:fixed inset:0 z-index:9999 — nothing overlaps it
+══════════════════════════════════════════════════════════════ */
 
 .smc-modal {
-  display: none;
   position: fixed;
   inset: 0;
-  z-index: 200;
-  background: rgba(7, 10, 15, 0.97);
-  backdrop-filter: blur(16px);
+  z-index: 9999;
+  display: none;           /* hidden by default — no space taken */
   flex-direction: column;
-  overflow: hidden;
+  background: #080b0f;
+  opacity: 0;
+  pointer-events: none;
+  transform: translateY(12px);
+  transition: opacity 0.22s ease, transform 0.22s ease;
 }
 
 .smc-modal.open {
-  display: flex;
+  display: flex;           /* only flex when open */
+  opacity: 1;
+  pointer-events: all;
+  transform: translateY(0);
 }
 
-/* TOP BAR */
+/* ── MODAL TOP BAR ──────────────────────────────────────────── */
 .smc-modal-topbar {
   display: flex;
   align-items: center;
-  gap: 12px;
-  padding: 14px 24px;
-  background: var(--bg-card);
+  gap: 14px;
+  padding: 0 24px;
+  height: 56px;
+  min-height: 56px;
+  background: #0e1318;
   border-bottom: 1px solid var(--border-bright);
   flex-shrink: 0;
 }
@@ -1801,7 +2917,7 @@ body {
   font-size: 1.1rem;
   font-weight: 900;
   color: var(--accent);
-  letter-spacing: 2px;
+  letter-spacing: 3px;
 }
 
 .smc-modal-price {
@@ -1814,86 +2930,89 @@ body {
 .smc-modal-change {
   font-family: var(--font-mono);
   font-size: 0.8rem;
+  font-weight: 600;
   letter-spacing: 1px;
 }
 
 .smc-modal-badge {
-  font-family: var(--font-mono);
-  font-size: 0.7rem;
+  font-family: var(--font-display);
+  font-size: 0.6rem;
+  font-weight: 700;
   letter-spacing: 2px;
-  padding: 3px 10px;
-  border-radius: 2px;
-  border: 1px solid;
+  padding: 4px 10px;
+  border-radius: 3px;
+  border: 1px solid transparent;
 }
-.smc-modal-badge.bull { border-color: var(--bull); color: var(--bull); background: rgba(0,230,118,0.07); }
-.smc-modal-badge.bear { border-color: var(--bear); color: var(--bear); background: rgba(255,61,87,0.07); }
-.smc-modal-badge.accent { border-color: var(--accent); color: var(--accent); background: var(--accent-glow); }
+.smc-modal-badge.bull  { color: var(--bull);   background: var(--bull-glow);   border-color: rgba(0,230,118,0.3); }
+.smc-modal-badge.bear  { color: var(--bear);   background: var(--bear-glow);   border-color: rgba(255,61,87,0.3); }
+.smc-modal-badge.accent{ color: var(--accent); background: var(--accent-glow); border-color: rgba(0,212,255,0.3); }
 
 .smc-modal-close {
   margin-left: auto;
-  background: none;
-  border: 1px solid var(--border-bright);
-  color: var(--text-secondary);
-  font-family: var(--font-body);
-  font-size: 0.7rem;
-  font-weight: 600;
+  font-family: var(--font-mono);
+  font-size: 0.62rem;
   letter-spacing: 2px;
-  padding: 7px 14px;
+  padding: 7px 16px;
+  border: 1px solid var(--border-bright);
+  background: transparent;
+  color: var(--text-secondary);
   border-radius: var(--radius);
   cursor: pointer;
   transition: all 0.15s ease;
+  flex-shrink: 0;
 }
-
 .smc-modal-close:hover {
   border-color: var(--bear);
   color: var(--bear);
+  background: var(--bear-glow);
 }
 
-/* META BAR */
+/* ── MODAL META BAR ─────────────────────────────────────────── */
 .smc-modal-metabar {
   display: flex;
-  gap: 4px;
-  padding: 10px 24px;
-  background: var(--bg-base);
+  align-items: stretch;
+  background: #0b0f14;
   border-bottom: 1px solid var(--border);
-  flex-wrap: wrap;
   flex-shrink: 0;
+  overflow-x: auto;
 }
+.smc-modal-metabar::-webkit-scrollbar { display: none; }
 
 .smc-modal-pill {
   display: flex;
   flex-direction: column;
+  justify-content: center;
   gap: 2px;
-  padding: 8px 14px;
-  background: var(--bg-card);
-  border: 1px solid var(--border);
-  border-radius: var(--radius);
-  min-width: 100px;
+  padding: 8px 20px;
+  border-right: 1px solid var(--border);
+  flex-shrink: 0;
 }
 
 .smc-pill-label {
   font-family: var(--font-mono);
-  font-size: 0.55rem;
+  font-size: 0.5rem;
   color: var(--text-dim);
-  letter-spacing: 1px;
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+  white-space: nowrap;
 }
 
 .smc-pill-val {
   font-family: var(--font-mono);
-  font-size: 0.75rem;
+  font-size: 0.78rem;
+  font-weight: 700;
   color: var(--text-primary);
   letter-spacing: 0.5px;
+  white-space: nowrap;
 }
 
-.smc-pill-val.accent { color: var(--accent); }
-
-/* TF SWITCHER BAR */
+/* ── MODAL TF SWITCHER ──────────────────────────────────────── */
 .smc-modal-tfbar {
   display: flex;
   align-items: center;
   gap: 10px;
   padding: 8px 24px;
-  background: var(--bg-card);
+  background: #0b0f14;
   border-bottom: 1px solid var(--border);
   flex-shrink: 0;
   flex-wrap: wrap;
@@ -1901,450 +3020,112 @@ body {
 
 .smc-modal-tf-label {
   font-family: var(--font-mono);
-  font-size: 0.6rem;
+  font-size: 0.58rem;
   color: var(--text-dim);
-  letter-spacing: 1px;
+  letter-spacing: 1.5px;
   white-space: nowrap;
+  flex-shrink: 0;
 }
 
 .smc-modal-tf-btns {
   display: flex;
-  gap: 4px;
+  gap: 5px;
   flex-wrap: wrap;
 }
 
 .modal-tf-btn {
-  background: var(--bg-input);
+  font-family: var(--font-mono);
+  font-size: 0.62rem;
+  letter-spacing: 1.5px;
+  padding: 5px 12px;
+  border-radius: var(--radius);
   border: 1px solid var(--border);
+  background: transparent;
   color: var(--text-dim);
-  font-family: var(--font-body);
-  font-size: 0.65rem;
-  font-weight: 600;
-  letter-spacing: 1px;
-  padding: 5px 10px;
-  border-radius: 2px;
   cursor: pointer;
-  transition: all 0.15s ease;
+  transition: all 0.12s ease;
 }
-
-.modal-tf-btn:hover { color: var(--text-primary); background: var(--bg-elevated); }
-
-.modal-tf-btn.active {
-  background: var(--accent);
-  color: var(--bg-base);
+.modal-tf-btn:hover {
   border-color: var(--accent);
+  color: var(--accent);
+  background: var(--accent-glow);
+}
+.modal-tf-btn.active {
+  border-color: var(--accent);
+  background: var(--accent-glow);
+  color: var(--accent);
+  font-weight: 700;
+  cursor: default;
+  pointer-events: none;
 }
 
-/* MODAL BODY */
+/* ── MODAL BODY ─────────────────────────────────────────────── */
 .smc-modal-body {
   flex: 1;
   overflow-y: auto;
-  padding: 20px 24px;
+  overflow-x: hidden;
+  padding: 20px 24px 40px;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
 }
+.smc-modal-body::-webkit-scrollbar { width: 3px; }
+.smc-modal-body::-webkit-scrollbar-track { background: transparent; }
+.smc-modal-body::-webkit-scrollbar-thumb { background: var(--border-bright); border-radius: 2px; }
 
+/* Section labels inside modal */
 .smc-modal-section {
   display: flex;
   align-items: center;
-  gap: 10px;
-  margin: 20px 0 12px;
+  justify-content: space-between;
+  padding-bottom: 8px;
+  border-bottom: 1px solid var(--border);
 }
 
-.smc-modal-section:first-child { margin-top: 0; }
-
 .smc-modal-section-title {
-  font-family: var(--font-mono);
-  font-size: 0.65rem;
-  color: var(--accent);
-  letter-spacing: 3px;
+  font-family: var(--font-display);
+  font-size: 0.6rem;
   font-weight: 700;
+  letter-spacing: 3px;
+  color: var(--text-secondary);
 }
 
 .smc-modal-section-tag {
   font-family: var(--font-mono);
-  font-size: 0.6rem;
-  color: var(--text-dim);
-  letter-spacing: 1px;
+  font-size: 0.55rem;
+  color: var(--accent);
+  letter-spacing: 1.5px;
   padding: 2px 8px;
-  background: var(--bg-elevated);
-  border: 1px solid var(--border);
+  background: var(--accent-glow);
+  border: 1px solid rgba(0,212,255,0.15);
   border-radius: 2px;
 }
 
+/* Card rows inside modal */
 .smc-modal-row {
   display: grid;
   grid-template-columns: 1fr 1fr 1fr;
-  gap: 14px;
-  margin-bottom: 16px;
+  gap: 12px;
 }
 
 .smc-modal-card {
   background: var(--bg-card);
   border: 1px solid var(--border);
-  border-radius: var(--radius-lg);
+  border-radius: var(--radius);
   padding: 14px;
-  box-shadow: var(--shadow-card);
+  min-width: 0;
 }
 
 .smc-modal-card-full {
   grid-column: 1 / -1;
 }
 
-/* SMC OB / FVG / EQH rows inside cards */
-.smc-ob-row,
-.smc-fvg-row,
-.smc-eqh-row {
-  padding: 6px 10px;
-  border-radius: var(--radius);
-  border: 1px solid transparent;
-  margin-bottom: 4px;
-  font-family: var(--font-mono);
-  font-size: 0.72rem;
-  display: flex;
-  flex-direction: column;
-  gap: 2px;
+/* ── RESPONSIVE ─────────────────────────────────────────────── */
+@media (max-width: 1000px) {
+  .smc-modal-row { grid-template-columns: 1fr 1fr; }
 }
-
-.smc-ob-row.bull-ob {
-  background: rgba(0, 230, 118, 0.05);
-  border-color: rgba(0, 230, 118, 0.15);
-}
-
-.smc-ob-row.bear-ob {
-  background: rgba(255, 61, 87, 0.05);
-  border-color: rgba(255, 61, 87, 0.15);
-}
-
-.smc-fvg-row.bull-fvg {
-  background: rgba(0, 230, 118, 0.04);
-  border-color: rgba(0, 230, 118, 0.12);
-}
-
-.smc-fvg-row.bear-fvg {
-  background: rgba(255, 61, 87, 0.04);
-  border-color: rgba(255, 61, 87, 0.12);
-}
-
-.smc-eqh-row.eqh {
-  background: rgba(255, 61, 87, 0.04);
-  border-color: rgba(255, 61, 87, 0.12);
-}
-
-.smc-eqh-row.eql {
-  background: rgba(0, 230, 118, 0.04);
-  border-color: rgba(0, 230, 118, 0.12);
-}
-
-.smc-ob-tag,
-.smc-fvg-tag,
-.smc-eqh-tag {
-  font-size: 0.6rem;
-  letter-spacing: 1px;
-  font-weight: 700;
-}
-
-/* Confluence / Trade Idea */
-.smc-confluence-wrapper {
-  display: flex;
-  flex-direction: column;
-  gap: 10px;
-}
-
-.smc-trade-header {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  padding: 10px 14px;
-  border-radius: var(--radius);
-  border: 1px solid;
-  margin-bottom: 6px;
-}
-
-.smc-trade-header.long-header {
-  background: rgba(0, 230, 118, 0.06);
-  border-color: rgba(0, 230, 118, 0.2);
-}
-
-.smc-trade-header.short-header {
-  background: rgba(255, 61, 87, 0.06);
-  border-color: rgba(255, 61, 87, 0.2);
-}
-
-.smc-trade-header.neutral-header {
-  background: rgba(100, 130, 170, 0.06);
-  border-color: rgba(100, 130, 170, 0.2);
-}
-
-.smc-score-display {
-  font-family: var(--font-display);
-  font-size: 1.5rem;
-  font-weight: 900;
-  letter-spacing: 2px;
-}
-
-.smc-trade-label {
-  font-family: var(--font-mono);
-  font-size: 0.7rem;
-  letter-spacing: 2px;
-}
-
-.smc-wait-prob {
-  font-family: var(--font-mono);
-  font-size: 0.65rem;
-  color: var(--text-dim);
-  letter-spacing: 1px;
-}
-
-.smc-signals-list {
-  display: flex;
-  flex-direction: column;
-  gap: 4px;
-  margin: 6px 0;
-}
-
-.smc-signal-item {
-  font-family: var(--font-mono);
-  font-size: 0.7rem;
-  letter-spacing: 0.5px;
-  padding: 4px 0;
-}
-
-.smc-tp-grid {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 8px;
-  margin-top: 8px;
-}
-
-.smc-tp-item {
-  background: var(--bg-elevated);
-  border: 1px solid var(--border);
-  border-radius: var(--radius);
-  padding: 8px;
-  text-align: center;
-}
-
-.smc-tp-label {
-  font-family: var(--font-mono);
-  font-size: 0.55rem;
-  color: var(--text-dim);
-  letter-spacing: 1px;
-  margin-bottom: 4px;
-}
-
-.smc-tp-price {
-  font-family: var(--font-mono);
-  font-size: 0.8rem;
-  color: var(--bull);
-  letter-spacing: 0.5px;
-}
-
-.smc-tp-price.bear { color: var(--bear) !important; }
-
-.smc-tp-rr {
-  font-family: var(--font-mono);
-  font-size: 0.6rem;
-  color: var(--text-dim);
-  letter-spacing: 0.5px;
-  margin-top: 2px;
-}
-
-.smc-sl-row {
-  display: flex;
-  align-items: center;
-  gap: 10px;
-  padding: 8px 12px;
-  background: rgba(255, 61, 87, 0.05);
-  border: 1px solid rgba(255, 61, 87, 0.15);
-  border-radius: var(--radius);
-  margin-bottom: 6px;
-}
-
-.smc-sl-label {
-  font-family: var(--font-mono);
-  font-size: 0.6rem;
-  color: var(--bear);
-  letter-spacing: 1px;
-}
-
-.smc-sl-price {
-  font-family: var(--font-mono);
-  font-size: 0.85rem;
-  color: var(--bear);
-  letter-spacing: 0.5px;
-  font-weight: 700;
-}
-
-.smc-copy-btn {
-  margin-left: auto;
-  background: none;
-  border: 1px solid var(--border-bright);
-  color: var(--text-secondary);
-  font-family: var(--font-mono);
-  font-size: 0.6rem;
-  letter-spacing: 1px;
-  padding: 4px 10px;
-  border-radius: 2px;
-  cursor: pointer;
-  transition: all 0.15s ease;
-}
-
-.smc-copy-btn:hover {
-  border-color: var(--accent);
-  color: var(--accent);
-}
-
-.smc-invalidated-badge {
-  display: inline-block;
-  font-family: var(--font-mono);
-  font-size: 0.65rem;
-  color: var(--bear);
-  background: rgba(255, 61, 87, 0.08);
-  border: 1px solid rgba(255, 61, 87, 0.2);
-  padding: 3px 10px;
-  border-radius: 2px;
-  letter-spacing: 1px;
-  margin-bottom: 6px;
-}
-
-/* Premium / Discount */
-.smc-pd-bar-wrapper {
-  padding: 10px;
-  background: var(--bg-elevated);
-  border: 1px solid var(--border);
-  border-radius: var(--radius);
-}
-
-.smc-pd-labels {
-  display: flex;
-  justify-content: space-between;
-  font-family: var(--font-mono);
-  font-size: 0.6rem;
-  color: var(--text-dim);
-  letter-spacing: 1px;
-  margin-bottom: 6px;
-}
-
-.smc-pd-bar {
-  height: 10px;
-  background: linear-gradient(90deg, var(--bull-dim), var(--accent-dim), var(--bear-dim));
-  border-radius: 5px;
-  position: relative;
-  margin-bottom: 6px;
-}
-
-.smc-pd-needle {
-  position: absolute;
-  top: -4px;
-  width: 3px;
-  height: 18px;
-  background: var(--text-primary);
-  border-radius: 2px;
-  transform: translateX(-50%);
-  box-shadow: 0 0 6px rgba(255,255,255,0.4);
-  transition: left 0.4s ease;
-}
-
-.smc-pd-zone-label {
-  font-family: var(--font-mono);
-  font-size: 0.7rem;
-  text-align: center;
-  letter-spacing: 1px;
-  margin-top: 6px;
-  font-weight: 700;
-}
-
-.smc-pd-stats {
-  display: grid;
-  grid-template-columns: 1fr 1fr 1fr;
-  gap: 6px;
-  margin-top: 10px;
-}
-
-.smc-pd-stat {
-  background: var(--bg-card);
-  border: 1px solid var(--border);
-  border-radius: var(--radius);
-  padding: 6px;
-  text-align: center;
-}
-
-.smc-pd-stat-label {
-  font-family: var(--font-mono);
-  font-size: 0.55rem;
-  color: var(--text-dim);
-  letter-spacing: 1px;
-  margin-bottom: 3px;
-}
-
-.smc-pd-stat-val {
-  font-family: var(--font-mono);
-  font-size: 0.75rem;
-  color: var(--text-primary);
-  letter-spacing: 0.5px;
-}
-
-/* Structure rows */
-.smc-struct-row {
-  padding: 8px 10px;
-  border-radius: var(--radius);
-  border: 1px solid transparent;
-  margin-bottom: 5px;
-  display: flex;
-  align-items: center;
-  gap: 8px;
-  font-family: var(--font-mono);
-  font-size: 0.72rem;
-}
-
-.smc-struct-row.bull-struct {
-  background: rgba(0, 230, 118, 0.04);
-  border-color: rgba(0, 230, 118, 0.12);
-}
-
-.smc-struct-row.bear-struct {
-  background: rgba(255, 61, 87, 0.04);
-  border-color: rgba(255, 61, 87, 0.12);
-}
-
-.smc-struct-dot {
-  width: 7px;
-  height: 7px;
-  border-radius: 50%;
-  flex-shrink: 0;
-}
-
-.bull-struct .smc-struct-dot { background: var(--bull); box-shadow: 0 0 6px var(--bull); }
-.bear-struct .smc-struct-dot { background: var(--bear); box-shadow: 0 0 6px var(--bear); }
-
-/* ── RESPONSIVE SMC ─────────────────────────────────────────── */
-@media (max-width: 1100px) {
-  .smc-row-structure,
-  .smc-row-levels {
-    grid-template-columns: 1fr 1fr;
-  }
-  .smc-modal-row {
-    grid-template-columns: 1fr 1fr;
-  }
-}
-
-@media (max-width: 900px) {
-  .smc-row-structure,
-  .smc-row-levels,
-  .smc-modal-row {
-    grid-template-columns: 1fr;
-  }
-  .smc-modal-metabar {
-    gap: 6px;
-    padding: 8px 12px;
-  }
-  .smc-modal-topbar {
-    padding: 10px 12px;
-    flex-wrap: wrap;
-  }
-  .heatmap-grid {
-    grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
-  }
-  .smc-tp-grid {
-    grid-template-columns: 1fr 1fr 1fr;
-  }
+@media (max-width: 680px) {
+  .smc-modal-row { grid-template-columns: 1fr; }
+  .smc-modal-topbar { padding: 0 14px; gap: 8px; }
+  .smc-modal-body { padding: 14px 14px 32px; }
 }
